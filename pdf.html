@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pixel Morph - Image to PDF</title>
+    <link rel="stylesheet" href="pdf.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Sortable/1.14.0/Sortable.min.js"></script>
+    <script type="module" src="https://cdn.jsdelivr.net/npm/pdf-lib/dist/pdf-lib.min.js"></script>
+</head>
+<body>
+    <header>
+        <nav class="navbar">
+            <div class="navbar-left">
+                <span class="heading">Pixel Morph</span>
+
+            </div>
+            <div class="navbar-right">
+                <a href="#services">Services</a>
+                <a href="#contact">Contact</a>
+            </div>
+    </header>
+
+    <div class="main-layout">
+        <div class="upload-section">
+            <div class="upload-box" id="uploadBox">
+                <input type="file" id="fileInput" accept="image/*" multiple hidden />
+                Drag and Drop or Click to Select Files
+                <div id="fileList"></div>
+            </div>
+        </div>
+    
+    <div class="right-pane">
+        <div class="reorder-section">
+            <h2>Reorder Images</h2>
+            <div class="image-grid" id="imageGrid"></div>
+        </div>
+        <div class="convert-section">
+            <h2 class="convertlabel">Convert to PDF</h2>
+            <div class="metadata-form">
+                <div class="left">
+                    <div class="form">
+                        <input class="input" placeholder="Document name" required="" type="text">
+                        <span class="input-border"></span>
+                      </div>
+
+
+                      <div class="form">
+                        <input id="" class="input" placeholder="Author name" required="" type="text">
+                        <span class="input-border"></span>
+                      </div>
+                      </div>
+                <div class="right">
+                    <div class="form">
+                        <input class="input" placeholder="Subject" required="" type="text">
+                        <span class="input-border"></span>
+                      </div>
+
+                      <div class="form">
+                        <input class="input" placeholder="Keywords" required="" type="text">
+                        <span class="input-border"></span>
+                      </div>
+            </div>
+            <br> 
+        </div>
+        <div>
+            <button id="convertButton">Convert to PDF</button>
+            <!-- <a id="downloadLink" style="display:none;">Download PDF</a> -->
+        </div>
+    </div>
+</div>
+<div id="thankYouOverlay" class="thank-you-overlay hidden">
+    <div class="thank-you-content">
+      <div class="thankyouconvent1">Conversion Successful!</div>
+      <!-- <p>Your PDF has been successfully created.</p> -->
+      <button id="downloadButton" class="action-button">Download PDF</button>
+      <button id="convertMoreButton" class="convertmorebtn action-button1">Convert More</button>
+    </div>
+  </div>
+  <div id="loadingOverlay" class="loading-overlay hidden">
+    <div class="loader">
+      <div class="loading-bar"></div>
+      <div class="loading-bar"></div>
+      <div class="loading-bar"></div>
+      <div class="loading-bar"></div>
+    </div>
+  </div>
+        </main>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.3.1/jspdf.umd.min.js"></script>
+        <script type="module" src="pdf.js"></script>
+</body>
+</html>
