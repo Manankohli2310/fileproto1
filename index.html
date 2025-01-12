@@ -19,6 +19,16 @@
                 <a href="#services">Services</a>
                 <a href="#contact">Contact</a>
             </div>
+            <div class="navbar-1">
+                <div class="hamburger-menu">
+                    <img class="line" src="Hamburger.png" alt="Menu">
+                </div>
+                <div class="dropdown-menu hidden">
+                  <a href="#services">Services</a>
+                  <a href="#contact">Contact</a>
+                </div>
+              </div>
+        </nav>
     </header>
 
     <div class="main-layout">
@@ -29,11 +39,10 @@
                 <div id="fileList"></div>
             </div>
         </div>
-    
     <div class="right-pane">
         <div class="reorder-section">
             <h2>Reorder Images</h2>
-            <div class="image-grid" id="imageGrid"></div>
+            <div class="image-grid" id="imageGrid"> </div> 
         </div>
         <div class="convert-section">
             <h2 class="convertlabel">Convert to PDF</h2>
@@ -72,21 +81,19 @@
 <div id="thankYouOverlay" class="thank-you-overlay hidden">
     <div class="thank-you-content">
       <div class="thankyouconvent1">Conversion Successful!</div>
-      <!-- <p>Your PDF has been successfully created.</p> -->
       <button id="downloadButton" class="action-button">Download PDF</button>
       <button id="convertMoreButton" class="convertmorebtn action-button1">Convert More</button>
     </div>
-  </div>
-  <div id="loadingOverlay" class="loading-overlay hidden">
+    </div>
+    <div id="loadingOverlay" class="loading-overlay hidden">
     <div class="loader">
       <div class="loading-bar"></div>
       <div class="loading-bar"></div>
       <div class="loading-bar"></div>
       <div class="loading-bar"></div>
     </div>
-  </div>
+    </div>
         </main>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.3.1/jspdf.umd.min.js"></script>
         <script type="module" src="pdf.js"></script>
 </body>
 </html>
