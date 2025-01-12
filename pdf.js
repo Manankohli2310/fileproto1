@@ -10,6 +10,35 @@ document.getElementById("uploadBox").addEventListener("click", () => {
 document.getElementById("fileInput").addEventListener("change", handleFileSelect);
 document.getElementById("convertButton").addEventListener("click", convertToPDF);
 
+// Enable drag-and-drop functionality
+const uploadBox = document.getElementById("uploadBox");
+uploadBox.addEventListener("dragover", handleDragOver);
+uploadBox.addEventListener("dragleave", handleDragLeave);
+uploadBox.addEventListener("drop", handleFileDrop);
+
+function handleDragOver(event) {
+    event.preventDefault();
+    event.stopPropagation();
+    uploadBox.classList.add("dragging");
+}
+
+function handleDragLeave(event) {
+    event.preventDefault();
+    event.stopPropagation();
+    uploadBox.classList.remove("dragging");
+}
+
+function handleFileDrop(event) {
+    event.preventDefault();
+    event.stopPropagation();
+    uploadBox.classList.remove("dragging");
+
+    const files = event.dataTransfer.files;
+    if (files && files.length > 0) {
+        handleFileSelect({ target: { files } });
+    }
+}
+
 // Pre-create empty boxes inside the grid when the page loads
 function createEmptyBoxes() {
     const imageGrid = document.getElementById("imageGrid");
@@ -23,7 +52,7 @@ function createEmptyBoxes() {
 
         const placeholderText = document.createElement("span");
         placeholderText.textContent = "No Image";
-        placeholderText.style.color = "#c9a7ad";
+        placeholderText.style.color = "#f0cefab9";
         placeholderText.style.fontSize = "14px";
         imageItem.style.display = "flex";
         imageItem.style.justifyContent = "center";
@@ -90,7 +119,6 @@ async function convertToPDF() {
 
     console.log("Converting the following images to PDF: ", reorderedFiles);
 
-    // Show the loading overlay
     const loadingOverlay = document.getElementById("loadingOverlay");
     if (loadingOverlay) loadingOverlay.style.display = "flex";
 
@@ -98,7 +126,6 @@ async function convertToPDF() {
     const downloadButton = document.getElementById("downloadButton");
     const convertMoreButton = document.getElementById("convertMoreButton");
 
-    // Fetch metadata values from input fields
     const pdfName = document.querySelector(".metadata-form .input[placeholder='Document name']").value || "Converted PDF";
     const authorName = document.querySelector(".metadata-form .input[placeholder='Author name']").value || "";
     const subject = document.querySelector(".metadata-form .input[placeholder='Subject']").value || "";
@@ -106,7 +133,6 @@ async function convertToPDF() {
 
     const pdfDoc = await PDFDocument.create();
 
-    // Set metadata
     pdfDoc.setTitle(pdfName);
     pdfDoc.setAuthor(authorName);
     pdfDoc.setSubject(subject);
@@ -129,7 +155,7 @@ async function convertToPDF() {
         const imgHeight = img.height;
 
         const pageWidth = 595.28; // A4 page width in points
-        const scaledHeight = (pageWidth * imgHeight) / imgWidth; // Scale height proportionally
+        const scaledHeight = (pageWidth * imgHeight) / imgWidth;
 
         const page = pdfDoc.addPage([pageWidth, scaledHeight]);
         page.drawImage(img, {
@@ -143,12 +169,10 @@ async function convertToPDF() {
     const pdfBytes = await pdfDoc.save();
     const blob = new Blob([pdfBytes], { type: 'application/pdf' });
 
-    // Delay for 2 seconds before hiding the loading overlay and showing the thank you overlay
     setTimeout(() => {
         if (loadingOverlay) loadingOverlay.style.display = "none";
         thankYouOverlay.style.display = "flex";
 
-        // Set up download link
         downloadButton.addEventListener("click", () => {
             const downloadLink = document.createElement("a");
             downloadLink.href = URL.createObjectURL(blob);
@@ -156,13 +180,13 @@ async function convertToPDF() {
             downloadLink.click();
         });
 
-        // Set up "Convert More" button
         convertMoreButton.addEventListener("click", () => {
             thankYouOverlay.style.display = "none";
             window.location.reload();
         });
     }, 2000);
 }
+
 function fileToBase64(file) {
     return new Promise((resolve, reject) => {
         const reader = new FileReader();
@@ -172,4 +196,16 @@ function fileToBase64(file) {
     });
 }
 
+const thankYouSlide = document.getElementById('thankYouOverlay');
+const convertMoreButton = document.getElementById('convertMoreButton');
+
+thankYouSlide.addEventListener('click', () => {
+    convertMoreButton.click();
+})
+const hamburgerMenu = document.querySelector('.hamburger-menu');
+const dropdownMenu = document.querySelector('.dropdown-menu');
+
+hamburgerMenu.addEventListener('click', () => {
+    dropdownMenu.classList.toggle('show');
+});
 createEmptyBoxes();
