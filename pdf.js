@@ -208,4 +208,5 @@ const dropdownMenu = document.querySelector('.dropdown-menu');
 hamburgerMenu.addEventListener('click', () => {
     dropdownMenu.classList.toggle('show');
 });
+
 createEmptyBoxes();
