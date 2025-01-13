@@ -364,10 +364,6 @@ h2 {
   box-shadow: 0 0 10px #eee;
   max-width: 90%;
   position: absolute;
-  /* z-index: 9999;
-    */
-  /* position: relative; */
-  /* overflow: hidden; */
 }
 
 .thankyouconvent1  {
@@ -598,6 +594,11 @@ h2 {
   .right-pane{
     transform: scale(0.755);
     padding: 0;
+  }
+}
+@media (max-width:400px){
+  .thank-you-content{
+    transform: scale(0.9);
   }
 }
 @media (min-width:400px) and (max-width:425px){
